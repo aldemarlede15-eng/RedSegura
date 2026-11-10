@@ -1,0 +1,164 @@
+
+@startuml RedSegura
+
+title DIAGRAMA DE CLASES UML - RED SEGURA
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam linetype ortho
+
+package "com.redsegura.model" {
+
+    class Vertex {
+        - String id
+        - String nombre
+        - String tipo
+        + Vertex(id, nombre, tipo)
+        + getId() String
+        + getNombre() String
+        + getEtiqueta() String
+        + getTipo() String
+        + setNombre(nombre) void
+        + setTipo(tipo) void
+        + toString() String
+    }
+
+    class Edge {
+        - String id
+        - Vertex origen
+        - Vertex destino
+        - int peso
+        - String etiqueta
+        - boolean dirigida
+        + Edge(id, origen, destino, peso, etiqueta, dirigida)
+        + getId() String
+        + getOrigen() Vertex
+        + getDestino() Vertex
+        + getPeso() int
+        + getEtiqueta() String
+        + isDirigida() boolean
+        + toString() String
+    }
+}
+
+package "com.redsegura.graph" {
+
+    class MixedGraph {
+        - Map vertices
+        - Map adjacencyList
+        - Map edges
+        - Set blockedEdges
+        + addVertex(vertex) void
+        + addDirectedEdge(...) void
+        + addUndirectedEdge(...) void
+        + blockEdge(id) void
+        + unblockEdge(id) void
+        + isEdgeBlocked(id) boolean
+        + getVertex(id) Vertex
+        + getEdges() List
+        + getEdge(id) Edge
+        + getVertices() List
+        + getNeighbors(id) List
+        + getOppositeVertex(id, edge) Vertex
+        + showGraph() void
+    }
+
+    class GraphRepresentations {
+        + showAdjacencyList(graph) void
+        + showAdjacencyMatrix(graph) void
+        + showIncidenceMatrix(graph) void
+    }
+
+    class BFS {
+        + traverse(graph, startId) void
+    }
+
+    class DFS {
+        + traverse(graph, startId) void
+        - traverseRecursive(graph, current, visited) void
+    }
+
+    class DijkstraSolver {
+        + findShortestPath(graph, origen, destino) void
+    }
+}
+
+package "com.redsegura.tree" {
+
+    class BinarySearchTree {
+        - Node root
+        + insert(vertex) void
+        + search(id) boolean
+        + searchComparisons(id) int
+        + delete(id) void
+        + height() int
+        + inOrder() void
+        + preOrder() void
+        + postOrder() void
+    }
+
+    class AvlTree {
+        - Node root
+        + insert(vertex) void
+        + search(id) boolean
+        + searchComparisons(id) int
+        + delete(id) void
+        + height() int
+        + getRootBalanceFactor() int
+        + getRootId() String
+        + isBalanced() boolean
+        + inOrder() void
+        + preOrder() void
+        + postOrder() void
+    }
+}
+
+package "com.redsegura.app" {
+    class DataFactory {
+        + createGraph() MixedGraph
+    }
+}
+
+package "com.redsegura" {
+    class RedSegura {
+        + main(args) void
+    }
+}
+
+package "Pruebas JUnit 5" {
+    class AvlTest
+    class BinarySearchTreeTest
+    class MixedGraphTest
+    class DijkstraSolverTest
+}
+
+Edge --> Vertex : origen y destino
+
+MixedGraph o-- Vertex : administra
+MixedGraph o-- Edge : administra
+
+GraphRepresentations ..> MixedGraph : utiliza
+BFS ..> MixedGraph : recorre
+DFS ..> MixedGraph : recorre
+DijkstraSolver ..> MixedGraph : calcula rutas
+
+BinarySearchTree ..> Vertex : almacena
+AvlTree ..> Vertex : almacena
+
+DataFactory ..> MixedGraph : construye
+RedSegura ..> DataFactory : utiliza
+RedSegura ..> MixedGraph : utiliza
+RedSegura ..> GraphRepresentations : utiliza
+RedSegura ..> BFS : utiliza
+RedSegura ..> DFS : utiliza
+RedSegura ..> DijkstraSolver : utiliza
+RedSegura ..> BinarySearchTree : utiliza
+RedSegura ..> AvlTree : utiliza
+
+AvlTest ..> AvlTree : prueba
+BinarySearchTreeTest ..> BinarySearchTree : prueba
+MixedGraphTest ..> MixedGraph : prueba
+DijkstraSolverTest ..> DijkstraSolver : prueba
+
+@enduml
+
