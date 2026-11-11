@@ -55,12 +55,14 @@ El proyecto está organizado en los siguientes paquetes:
 - Representación mediante matriz de incidencia.
 - Recorrido BFS utilizando una cola.
 - Recorrido DFS utilizando recursividad.
+- Detección de ciclos.
+- Identificación de componentes conexos débiles.
 - Bloqueo y habilitación de rutas.
 
 **Algoritmo de Dijkstra**
 
 - Búsqueda del camino de menor costo.
-- Uso de PriorityQueue.
+- Uso de `PriorityQueue`.
 - Registro de distancias y vértices predecesores.
 - Reconstrucción del camino encontrado.
 - Manejo de vértices inexistentes y destinos sin conexión.
@@ -138,25 +140,28 @@ Resultados de las pruebas:
 
 | Clase de prueba | Pruebas |
 |---|---:|
+| DFSTest | 4 |
 | DijkstraSolverTest | 7 |
 | MixedGraphTest | 8 |
 | AvlTest | 6 |
 | BinarySearchTreeTest | 5 |
-| **Total** | **26** |
+| **Total** | **30** |
 
 Todas las pruebas se ejecutaron correctamente:
 
-- 26 pruebas ejecutadas.
+- 30 pruebas ejecutadas.
 - 0 fallos.
 - 0 errores.
 - 0 pruebas omitidas.
+
+Resultado de ejecución: `BUILD SUCCESS`.
 
 ### 9. Ejecución del proyecto
 
 Para ejecutar el proyecto desde Apache NetBeans:
 
 1. Abrir el proyecto RedSegura.
-2. Verificar que esté configurado con Java 17.
+2. Verificar que esté configurado para compilar con Java 17.
 3. Ejecutar la clase principal `RedSegura.java`.
 
 También se pueden ejecutar las pruebas desde Maven utilizando:
