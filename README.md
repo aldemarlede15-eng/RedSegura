@@ -1,3 +1,4 @@
+
 # RED SEGURA SINCELEJO
 
 ## Árboles y grafos aplicados a una red de atención de emergencias
@@ -44,8 +45,9 @@ El proyecto está organizado en los siguientes paquetes:
 - Búsqueda de vértices.
 - Cálculo de altura y factor de equilibrio.
 - Rotaciones LL, RR, LR y RL.
+- Demostración de las cuatro rotaciones.
 - Verificación del balance del árbol.
-- Recorridos.
+- Recorridos inorden, preorden y postorden.
 
 **Grafos**
 
@@ -54,6 +56,7 @@ El proyecto está organizado en los siguientes paquetes:
 - Representación mediante matriz de adyacencia ponderada.
 - Representación mediante matriz de incidencia.
 - Recorrido BFS utilizando una cola.
+- Construcción y visualización del árbol BFS.
 - Recorrido DFS utilizando recursividad.
 - Detección de ciclos.
 - Identificación de componentes conexos débiles.
