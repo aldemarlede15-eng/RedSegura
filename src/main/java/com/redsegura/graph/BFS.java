@@ -7,10 +7,13 @@ import java.util.*;
 
 public class BFS {
 
+    // =====================================
+    // RECORRIDO BFS
+    // =====================================
+
     public static void traverse(MixedGraph graph, String startId) {
 
-        // Verificar que el vertice inicial exista
-        if (graph.getVertex(startId) == null) {
+        if (graph == null || graph.getVertex(startId) == null) {
             System.out.println("El vertice no existe");
             return;
         }
@@ -18,20 +21,17 @@ public class BFS {
         Set<String> visited = new HashSet<>();
         Queue<String> queue = new LinkedList<>();
 
-        // Marcar el vertice inicial
         visited.add(startId);
         queue.offer(startId);
 
         System.out.println("\n--- RECORRIDO BFS ---");
 
-        // Recorrer mientras existan vertices en la cola
         while (!queue.isEmpty()) {
 
             String current = queue.poll();
 
             System.out.print(current + " ");
 
-            // Obtener las conexiones disponibles
             for (Edge edge : graph.getNeighbors(current)) {
 
                 Vertex neighborVertex =
@@ -43,7 +43,6 @@ public class BFS {
 
                 String neighbor = neighborVertex.getId();
 
-                // Visitar cada vertice una sola vez
                 if (!visited.contains(neighbor)) {
 
                     visited.add(neighbor);
@@ -53,5 +52,55 @@ public class BFS {
         }
 
         System.out.println();
+    }
+
+    // =====================================
+    // CONSTRUCCION DEL ARBOL BFS
+    // =====================================
+
+    public static BFSTree buildTree(
+            MixedGraph graph, String startId) {
+
+        if (graph == null || graph.getVertex(startId) == null) {
+            System.out.println("El vertice no existe");
+            return null;
+        }
+
+        Set<String> visited = new HashSet<>();
+        Queue<String> queue = new LinkedList<>();
+
+        BFSTree tree = new BFSTree(startId);
+
+        visited.add(startId);
+        queue.offer(startId);
+        tree.addVertex(startId);
+
+        while (!queue.isEmpty()) {
+
+            String current = queue.poll();
+
+            for (Edge edge : graph.getNeighbors(current)) {
+
+                Vertex neighborVertex =
+                        graph.getOppositeVertex(current, edge);
+
+                if (neighborVertex == null) {
+                    continue;
+                }
+
+                String neighbor = neighborVertex.getId();
+
+                if (!visited.contains(neighbor)) {
+
+                    visited.add(neighbor);
+                    queue.offer(neighbor);
+
+                    tree.addVertex(neighbor);
+                    tree.addConnection(current, neighbor);
+                }
+            }
+        }
+
+        return tree;
     }
 }
